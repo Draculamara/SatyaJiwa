@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SatyaJiwa - Perfect Fit Auth</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="auth-left">
+                <div class="brand-container">
+                    <div class="brand-logo-3d">
+                        <img src="assets/img/logo.png" alt="SatyaJiwa Logo" style="height: 40px;">                    
+                    </div>
+                    <h1 class="brand-name">SatyaJiwa</h1>
+                    <p class="brand-tagline">
+                        Platform kesehatan mental modern untuk kehidupan yang lebih baik
+                    </p>
+
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <span class="feature-text">Konsultasi Psikolog Profesional</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <span class="feature-text">Tracking Progress Real-time</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-spa"></i>
+                            </div>
+                            <span class="feature-text">Meditasi & Relaksasi Terpandu</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-right">
+                <div class="form-content">
+                    <div class="mobile-brand" style="display: none;">
+                        <div class="mobile-logo">
+                            <img src="assets/img/logo.png" alt="SatyaJiwa Logo" style="height: 40px;">
+                        </div>
+                        <div class="mobile-brand-name">SatyaJiwa</div>
+                    </div>
+
+                    <div class="auth-header">
+                        <h2 class="auth-title">Welcome Back!</h2>
+                        <p class="auth-subtitle">Pilih metode untuk melanjutkan</p>
+                    </div>
+
+                    <div class="tab-switcher">
+                        <button class="tab-btn active" onclick="switchTab('login')">
+                            Login
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('register')">
+                            Register
+                        </button>
+                    </div>
+
+                    <div class="auth-form-container active" id="loginForm">
+                        <div class="success-alert" id="loginSuccess">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Login berhasil!</span>
+                        </div>
+
+                        <form class="auth-form" onsubmit="handleLogin(event)">
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <div class="input-wrapper">
+                                    <input 
+                                        type="email" 
+                                        class="form-input" 
+                                        placeholder="your@email.com"
+                                        id="loginEmail"
+                                        required
+                                    >
+                                    <i class="fas fa-envelope input-icon"></i>
+                                </div>
+                                <div class="form-error" id="loginEmailError">Email tidak valid</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <div class="input-wrapper">
+                                    <input 
+                                        type="password" 
+                                        class="form-input" 
+                                        placeholder="••••••••"
+                                        id="loginPassword"
+                                        required
+                                    >
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <i class="fas fa-eye password-toggle" onclick="togglePassword('loginPassword', this)"></i>
+                                </div>
+                                <div class="form-error" id="loginPasswordError">Password minimal 6 karakter</div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="checkbox-wrapper">
+                                    <input type="checkbox" id="rememberMe">
+                                    <label for="rememberMe">Remember me</label>
+                                </div>
+                                <a href="#" class="forgot-link">Forgot?</a>
+                            </div>
+
+                            <button type="submit" class="btn-primary">
+                                Sign In
+                            </button>
+                        </form>
+
+                        <div class="social-divider">
+                            <span>Or</span>
+                        </div>
+
+                        <div class="social-buttons">
+                            <button class="btn-social" onclick="handleSocialLogin('google')">
+                                <i class="fab fa-google"></i> Google
+                            </button>
+                            <button class="btn-social" onclick="handleSocialLogin('facebook')">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="auth-form-container" id="registerForm">
+                        <div class="success-alert" id="registerSuccess">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Registrasi berhasil!</span>
+                        </div>
+
+                        <form class="auth-form" onsubmit="handleRegister(event)">
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <div class="input-wrapper">
+                                    <input 
+                                        type="text" 
+                                        class="form-input" 
+                                        placeholder="John Doe"
+                                        id="registerName"
+                                        required
+                                    >
+                                    <i class="fas fa-user input-icon"></i>
+                                </div>
+                                <div class="form-error" id="registerNameError">Nama minimal 3 karakter</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <div class="input-wrapper">
+                                    <input 
+                                        type="email" 
+                                        class="form-input" 
+                                        placeholder="your@email.com"
+                                        id="registerEmail"
+                                        required
+                                    >
+                                    <i class="fas fa-envelope input-icon"></i>
+                                </div>
+                                <div class="form-error" id="registerEmailError">Email tidak valid</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <div class="input-wrapper">
+                                    <input 
+                                        type="password" 
+                                        class="form-input" 
+                                        placeholder="Min. 6 karakter"
+                                        id="registerPassword"
+                                        required
+                                    >
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <i class="fas fa-eye password-toggle" onclick="togglePassword('registerPassword', this)"></i>
+                                </div>
+                                <div class="form-error" id="registerPasswordError">Password minimal 6 karakter</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Confirm Password</label>
+                                <div class="input-wrapper">
+                                    <input 
+                                        type="password" 
+                                        class="form-input" 
+                                        placeholder="Ulangi password"
+                                        id="registerConfirmPassword"
+                                        required
+                                    >
+                                    <i class="fas fa-shield-alt input-icon"></i>
+                                    <i class="fas fa-eye password-toggle" onclick="togglePassword('registerConfirmPassword', this)"></i>
+                                </div>
+                                <div class="form-error" id="registerConfirmPasswordError">Password tidak cocok</div>
+                            </div>
+
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="agreeTerms" required>
+                                <label for="agreeTerms">I agree to Terms & Conditions</label>
+                            </div>
+
+                            <button type="submit" class="btn-primary">
+                                Create Account
+                            </button>
+                        </form>
+
+                        <div class="social-divider">
+                            <span>Or</span>
+                        </div>
+
+                        <div class="social-buttons">
+                            <button class="btn-social" onclick="handleSocialLogin('google')">
+                                <i class="fab fa-google"></i> Google
+                            </button>
+                            <button class="btn-social" onclick="handleSocialLogin('facebook')">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        if (window.innerWidth <= 968) {
+            document.querySelector('.mobile-brand').style.display = 'flex';
+        }
+
+        function switchTab(tab) {
+            const loginBtn = document.querySelector('.tab-btn:first-child');
+            const registerBtn = document.querySelector('.tab-btn:last-child');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+
+            if (tab === 'login') {
+                loginBtn.classList.add('active');
+                registerBtn.classList.remove('active');
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+                document.querySelector('.auth-title').textContent = 'Welcome Back!';
+                document.querySelector('.auth-subtitle').textContent = 'Pilih metode untuk melanjutkan';
+            } else {
+                registerBtn.classList.add('active');
+                loginBtn.classList.remove('active');
+                registerForm.classList.add('active');
+                loginForm.classList.remove('active');
+                document.querySelector('.auth-title').textContent = 'Create Account';
+                document.querySelector('.auth-subtitle').textContent = 'Mulai perjalanan Anda';
+            }
+        }
+
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail');
+            const password = document.getElementById('loginPassword');
+            const btn = e.target.querySelector('.btn-primary');
+            
+            document.querySelectorAll('.form-error').forEach(err => err.classList.remove('show'));
+            document.querySelectorAll('.form-input').forEach(input => input.classList.remove('error'));
+            
+            let isValid = true;
+            
+            if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                email.classList.add('error');
+                document.getElementById('loginEmailError').classList.add('show');
+                isValid = false;
+            }
+            
+            if (password.value.length < 6) {
+                password.classList.add('error');
+                document.getElementById('loginPasswordError').classList.add('show');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            btn.classList.add('loading');
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+                document.getElementById('loginSuccess').classList.add('show');
+                
+                setTimeout(() => {
+                    alert('Login berhasil! (Demo Mode)');
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+                
+            }, 1500);
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('registerName');
+            const email = document.getElementById('registerEmail');
+            const password = document.getElementById('registerPassword');
+            const confirmPassword = document.getElementById('registerConfirmPassword');
+            const btn = e.target.querySelector('.btn-primary');
+            
+            document.querySelectorAll('.form-error').forEach(err => err.classList.remove('show'));
+            document.querySelectorAll('.form-input').forEach(input => input.classList.remove('error'));
+            
+            let isValid = true;
+            
+            if (name.value.length < 3) {
+                name.classList.add('error');
+                document.getElementById('registerNameError').classList.add('show');
+                isValid = false;
+            }
+            
+            if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                email.classList.add('error');
+                document.getElementById('registerEmailError').classList.add('show');
+                isValid = false;
+            }
+            
+            if (password.value.length < 6) {
+                password.classList.add('error');
+                document.getElementById('registerPasswordError').classList.add('show');
+                isValid = false;
+            }
+            
+            if (password.value !== confirmPassword.value) {
+                confirmPassword.classList.add('error');
+                document.getElementById('registerConfirmPasswordError').classList.add('show');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            btn.classList.add('loading');
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+                document.getElementById('registerSuccess').classList.add('show');
+                
+                setTimeout(() => {
+                    document.getElementById('registerSuccess').classList.remove('show');
+                    switchTab('login');
+                    alert('Registrasi berhasil! (Demo Mode)\nSilakan login.');
+                }, 1500);
+            }, 1500);
+        }
+
+        function handleSocialLogin(provider) {
+            alert(`Login dengan ${provider.charAt(0).toUpperCase() + provider.slice(1)} (Demo Mode)`);
+        }
+
+        document.getElementById('loginEmail')?.addEventListener('input', function() {
+            if (this.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                this.classList.remove('error');
+                document.getElementById('loginEmailError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('loginPassword')?.addEventListener('input', function() {
+            if (this.value.length >= 6) {
+                this.classList.remove('error');
+                document.getElementById('loginPasswordError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('registerName')?.addEventListener('input', function() {
+            if (this.value.length >= 3) {
+                this.classList.remove('error');
+                document.getElementById('registerNameError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('registerEmail')?.addEventListener('input', function() {
+            if (this.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                this.classList.remove('error');
+                document.getElementById('registerEmailError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('registerPassword')?.addEventListener('input', function() {
+            if (this.value.length >= 6) {
+                this.classList.remove('error');
+                document.getElementById('registerPasswordError').classList.remove('show');
+            }
+            
+            const confirmPassword = document.getElementById('registerConfirmPassword');
+            if (confirmPassword.value && this.value === confirmPassword.value) {
+                confirmPassword.classList.remove('error');
+                document.getElementById('registerConfirmPasswordError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('registerConfirmPassword')?.addEventListener('input', function() {
+            const password = document.getElementById('registerPassword');
+            if (this.value === password.value) {
+                this.classList.remove('error');
+                document.getElementById('registerConfirmPasswordError').classList.remove('show');
+            }
+        });
+
+        document.querySelectorAll('.btn-social').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+            });
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 968) {
+                document.querySelector('.mobile-brand').style.display = 'flex';
+            } else {
+                document.querySelector('.mobile-brand').style.display = 'none';
+            }
+        });
+
+        if (window.innerWidth <= 640) {
+            document.querySelectorAll('.form-input').forEach(input => {
+                input.addEventListener('focus', function() {
+                    const viewport = document.querySelector('meta[name=viewport]');
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+                });
+                
+                input.addEventListener('blur', function() {
+                    const viewport = document.querySelector('meta[name=viewport]');
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

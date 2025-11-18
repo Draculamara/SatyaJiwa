@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Pengaturan - SatyaJiwa</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <script src="assets/js/sidebar.js" defer></script>
+    <link rel="icon" href="assets/img/logo.png" type="image/png">
+
+    <style>
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .overlay {
+                display: none;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .overlay.active {
+                display: block;
+                opacity: 1;
+            }
+            
+            body.sidebar-open {
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+
+    <header class="mobile-header">
+        <div class="mobile-toggle" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="mobile-logo">
+            <img src="assets/img/logo.png" alt="SatyaJiwa Logo" class="mobile-logo-img" style="width: 40px;">
+            <div class="mobile-logo-text">SatyaJiwa</div>
+        </div>
+    </header>
+
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Pengaturan</h1>
+            <p class="page-subtitle">Kelola profil dan preferensi akun Anda</p>
+        </div>
+
+        <div class="settings-container">
+            <div class="settings-sidebar">
+                <div class="settings-nav">
+                    <button class="settings-nav-btn active" data-tab="profile">
+                        <i class="fas fa-user"></i>
+                        <span>Profil</span>
+                    </button>
+                    <button class="settings-nav-btn" data-tab="account">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Keamanan</span>
+                    </button>
+                    <button class="settings-nav-btn" data-tab="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span>Notifikasi</span>
+                    </button>
+                    <button class="settings-nav-btn" data-tab="privacy">
+                        <i class="fas fa-lock"></i>
+                        <span>Privasi</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="settings-content">
+                <div class="settings-tab active" id="profile-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Informasi Profil</h2>
+                        </div>
+                        
+                        <div class="profile-photo-section">
+                            <div class="current-photo">
+                                <div class="photo-placeholder">JD</div>
+                            </div>
+                            <div class="photo-actions">
+                                <h3>Foto Profil</h3>
+                                <p>Foto profil Anda akan ditampilkan di seluruh platform</p>
+                                <div class="flex gap-sm" style="margin-top: 12px;">
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-upload"></i> Unggah Foto
+                                    </button>
+                                    <button class="btn btn-outline">
+                                        <i class="fas fa-trash"></i> Hapus
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form class="settings-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Nama Depan</label>
+                                    <input type="text" class="form-input" value="John" placeholder="Masukkan nama depan">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Nama Belakang</label>
+                                    <input type="text" class="form-input" value="Doe" placeholder="Masukkan nama belakang">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" value="john.doe@example.com" placeholder="email@example.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Nomor Telepon</label>
+                                <input type="tel" class="form-input" value="+62 812 3456 7890" placeholder="+62">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Tanggal Lahir</label>
+                                    <input type="date" class="form-input" value="1990-01-15">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Jenis Kelamin</label>
+                                    <select class="form-select">
+                                        <option>Laki-laki</option>
+                                        <option>Perempuan</option>
+                                        <option>Lainnya</option>
+                                        <option>Tidak ingin menyebutkan</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Bio</label>
+                                <textarea class="form-textarea" placeholder="Ceritakan sedikit tentang diri Anda...">Saya adalah seorang profesional yang peduli dengan kesehatan mental.</textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Simpan Perubahan
+                                </button>
+                                <button type="button" class="btn btn-outline">
+                                    Batal
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="settings-tab" id="account-tab">
+                    <div class="card mb-lg">
+                        <div class="card-header">
+                            <h2 class="card-title">Keamanan Akun</h2>
+                        </div>
+
+                        <div class="security-item">
+                            <div class="security-info">
+                                <h3>
+                                    <i class="fas fa-key"></i>
+                                    Kata Sandi
+                                </h3>
+                                <p>Terakhir diubah 3 bulan yang lalu</p>
+                            </div>
+                            <button class="btn btn-outline" onclick="openPasswordModal()">
+                                Ubah Password
+                            </button>
+                        </div>
+
+                        <div class="security-item">
+                            <div class="security-info">
+                                <h3>
+                                    <i class="fas fa-mobile-alt"></i>
+                                    Autentikasi Dua Faktor
+                                </h3>
+                                <p>Tambahkan lapisan keamanan ekstra ke akun Anda</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="2faToggle">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Perangkat Terhubung</h2>
+                        </div>
+
+                        <div class="device-list">
+                            <div class="device-item">
+                                <div class="device-icon">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                                <div class="device-info">
+                                    <h4>MacBook Pro</h4>
+                                    <p>Chrome • Jakarta, Indonesia • Aktif sekarang</p>
+                                </div>
+                                <span class="device-status current">Perangkat ini</span>
+                            </div>
+
+                            <div class="device-item">
+                                <div class="device-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="device-info">
+                                    <h4>iPhone 13 Pro</h4>
+                                    <p>Safari • Jakarta, Indonesia • 2 jam yang lalu</p>
+                                </div>
+                                <button class="btn-text-danger">Keluar</button>
+                            </div>
+
+                            <div class="device-item">
+                                <div class="device-icon">
+                                    <i class="fas fa-tablet-alt"></i>
+                                </div>
+                                <div class="device-info">
+                                    <h4>iPad Air</h4>
+                                    <p>Safari • Bandung, Indonesia • 1 hari yang lalu</p>
+                                </div>
+                                <button class="btn-text-danger">Keluar</button>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-outline" style="width: 100%; margin-top: 16px;">
+                            <i class="fas fa-sign-out-alt"></i> Keluar dari Semua Perangkat
+                        </button>
+                    </div>
+                </div>
+
+                <div class="settings-tab" id="notifications-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Preferensi Notifikasi</h2>
+                            <p class="card-subtitle">Kelola bagaimana Anda menerima notifikasi</p>
+                        </div>
+
+                        <div class="notification-section">
+                            <h3>Notifikasi Push</h3>
+                            
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <h4>Pesan Baru</h4>
+                                    <p>Terima notifikasi saat ada pesan baru dari konselor</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <h4>Pengingat Sesi</h4>
+                                    <p>Dapatkan pengingat sebelum sesi konsultasi dimulai</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <h4>Pengingat Meditasi</h4>
+                                    <p>Ingatkan saya untuk melakukan meditasi harian</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <h4>Laporan Progress</h4>
+                                    <p>Terima ringkasan mingguan tentang progress Anda</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="notification-section">
+                            <h3>Notifikasi Email</h3>
+                            
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <h4>Newsletter</h4>
+                                    <p>Artikel dan tips kesehatan mental</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <h4>Update Produk</h4>
+                                    <p>Informasi tentang fitur dan pembaruan baru</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <h4>Promosi dan Penawaran</h4>
+                                    <p>Diskon khusus dan penawaran eksklusif</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Jam Tenang</label>
+                            <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 12px;">
+                                Atur waktu ketika Anda tidak ingin menerima notifikasi
+                            </p>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="time" class="form-input" value="22:00">
+                                </div>
+                                <div class="form-group">
+                                    <input type="time" class="form-input" value="07:00">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary">
+                            <i class="fas fa-save"></i> Simpan Preferensi
+                        </button>
+                    </div>
+                </div>
+
+                <div class="settings-tab" id="privacy-tab">
+                    <div class="card mb-lg">
+                        <div class="card-header">
+                            <h2 class="card-title">Pengaturan Privasi</h2>
+                        </div>
+
+                        <div class="privacy-item">
+                            <div class="privacy-info">
+                                <h3>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Layanan Lokasi
+                                </h3>
+                                <p>Gunakan lokasi untuk menemukan konselor terdekat</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="privacy-item">
+                            <div class="privacy-info">
+                                <h3>
+                                    <i class="fas fa-database"></i>
+                                    Penggunaan Data
+                                </h3>
+                                <p>Izinkan data anonim untuk meningkatkan layanan</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Data & Privasi</h2>
+                        </div>
+
+                        <div class="data-action-list">
+                            <div class="data-action-item">
+                                <div class="data-action-info">
+                                    <h4>
+                                        <i class="fas fa-download"></i>
+                                        Unduh Data Anda
+                                    </h4>
+                                    <p>Dapatkan salinan data pribadi yang kami simpan</p>
+                                </div>
+                                <button class="btn btn-outline">Unduh</button>
+                            </div>
+
+                            <div class="data-action-item danger">
+                                <div class="data-action-info">
+                                    <h4>
+                                        <i class="fas fa-user-times"></i>
+                                        Hapus Akun
+                                    </h4>
+                                    <p>Hapus akun dan semua data Anda secara permanen</p>
+                                </div>
+                                <button class="btn btn-danger">Hapus</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="password-modal" id="passwordModal">
+        <div class="password-modal-content">
+            <div class="modal-header">
+                <h2>Ubah Password</h2>
+                <button class="modal-close" onclick="closePasswordModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label class="form-label">Password Saat Ini</label>
+                    <input type="password" class="form-input" placeholder="Masukkan password saat ini">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password Baru</label>
+                    <input type="password" class="form-input" placeholder="Masukkan password baru">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Konfirmasi Password Baru</label>
+                    <input type="password" class="form-input" placeholder="Konfirmasi password baru">
+                </div>
+                <div class="password-requirements">
+                    <p><i class="fas fa-info-circle"></i> Password harus:</p>
+                    <ul>
+                        <li>Minimal 8 karakter</li>
+                        <li>Mengandung huruf besar dan kecil</li>
+                        <li>Mengandung angka</li>
+                        <li>Mengandung karakter khusus</li>
+                    </ul>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Ubah Password</button>
+                    <button type="button" class="btn btn-outline" onclick="closePasswordModal()">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+        
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 768) {
+                const mobileHeader = document.querySelector('.mobile-header');
+                
+                if (sidebar && sidebar.classList.contains('active')) {
+                    if (!sidebar.contains(event.target) && 
+                        !mobileHeader.contains(event.target)) {
+                        closeSidebar();
+                    }
+                }
+            }
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeSidebar();
+            }
+        });
+
+        const settingsNavBtns = document.querySelectorAll('.settings-nav-btn');
+        const settingsTabs = document.querySelectorAll('.settings-tab');
+
+        settingsNavBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabName = btn.getAttribute('data-tab');
+                
+                settingsNavBtns.forEach(b => b.classList.remove('active'));
+                settingsTabs.forEach(t => t.classList.remove('active'));
+                
+                btn.classList.add('active');
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+            });
+        });
+
+        function openPasswordModal() {
+            document.getElementById('passwordModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePasswordModal() {
+            document.getElementById('passwordModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Perubahan berhasil disimpan!');
+            });
+        });
+
+        document.querySelectorAll('.toggle-switch input').forEach(toggle => {
+            toggle.addEventListener('change', (e) => {
+                console.log('Toggle changed:', e.target.checked);
+            });
+        });
+    </script>
+</body>
+</html>
